@@ -32,12 +32,12 @@
 
     class Client
     {
-        void Operation()
+        public void UsePrototypePattern()
         {
-            Prototype prototype = new ConcretePrototype1(1);
-            Prototype clone = prototype.Clone();
-            prototype = new ConcretePrototype2(2);
-            clone = prototype.Clone();
+            Prototype prototype1 = new ConcretePrototype1(1);
+            Prototype clonePrototype1 = prototype1.Clone();
+            Prototype prototype2 = new ConcretePrototype2(2);
+            Prototype clonePrototype2 = prototype2.Clone();
         }
     }
 }

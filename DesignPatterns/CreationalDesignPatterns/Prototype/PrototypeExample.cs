@@ -2,34 +2,34 @@
 
 namespace Prototype.Example
 {
-    interface IFigure
+    interface IFigure1
     {
-        IFigure Clone();
+        IFigure1 Clone();
         void GetInfo();
     }
 
-    class Rectangle : IFigure
+    class Rectangle1 : IFigure1
     {
         int Width;
         int Height;
 
-        public Rectangle(int width, int height)
+        public Rectangle1(int width, int height)
         {
             Width = width;
             Height = height;
         }
 
-        public IFigure Clone() => new Rectangle(Width, Height);
+        public IFigure1 Clone() => new Rectangle1(Width, Height);
         public void GetInfo() => Console.WriteLine($"Прямоугольник длиной {Height} и шириной {Width}.");
     }
 
-    class Circle : IFigure
+    class Circle1 : IFigure1
     {
         int Radius;
 
-        public Circle(int radius) => Radius = radius;
+        public Circle1(int radius) => Radius = radius;
 
-        public IFigure Clone() => new Circle(Radius);
+        public IFigure1 Clone() => new Circle1(Radius);
         public void GetInfo() => Console.WriteLine($"Круг радиусом {Radius}.");
     }
 }

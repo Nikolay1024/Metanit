@@ -65,7 +65,7 @@ namespace AbstractFactory.Example
             Weapon = heroFactory.CreateWeapon();
         }
 
-        public void Run() => Movement.Move();
+        public void Move() => Movement.Move();
         public void Hit() => Weapon.Hit();
     }
 }

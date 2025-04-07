@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 
 namespace Iterator
 {
@@ -9,9 +9,9 @@ namespace Iterator
     // 3. Когда необходимо предоставить несколько альтернативных вариантов перебора одного и того же объекта.
     abstract class Enumerator
     {
-        public abstract object CurrentItem();
-        public abstract object FirstItem();
-        public abstract object NextItem();
+        public abstract int CurrentItem();
+        public abstract int FirstItem();
+        public abstract int? NextItem();
         public abstract bool IsEnumerationCompleted();
     }
 
@@ -22,11 +22,11 @@ namespace Iterator
 
         public ConcreteEnumerator(Enumerable enumerable) => Enumerable = enumerable;
 
-        public override object CurrentItem() => Enumerable[CurrentIndex];
-        public override object FirstItem() => Enumerable[0];
-        public override object NextItem()
+        public override int CurrentItem() => Enumerable[CurrentIndex];
+        public override int FirstItem() => Enumerable[0];
+        public override int? NextItem()
         {
-            object nextItem = null;
+            int? nextItem = null;
             if (CurrentIndex + 1 < Enumerable.Count)
             {
                 CurrentIndex++;
@@ -41,29 +41,29 @@ namespace Iterator
     {
         public abstract int Count { get; }
 
-        public abstract object this[int index] { get; }
+        public abstract int this[int index] { get; }
 
         public abstract Enumerator GetEnumerator();
     }
 
     class ConcreteEnumerable : Enumerable
     {
-        readonly ArrayList Items = new ArrayList();
+        readonly List<int> Items = new List<int>();
         public override int Count => Items.Count;
 
-        public override object this[int index] => Items[index];
+        public override int this[int index] => Items[index];
 
         public override Enumerator GetEnumerator() => new ConcreteEnumerator(this);
     }
 
     class Client
     {
-        public void Main()
+        public void UsePatternEnumerator()
         {
             Enumerable enumerable = new ConcreteEnumerable();
             Enumerator enumerator = enumerable.GetEnumerator();
 
-            object item = enumerator.FirstItem();
+            int? item = enumerator.FirstItem();
             while (!enumerator.IsEnumerationCompleted())
                 item = enumerator.NextItem();
         }

@@ -46,9 +46,8 @@ namespace Builder.Example
     // Абстрактный класс строителя (пекаря).
     abstract class BreadBuilder
     {
-        public Bread Bread { get; private set; }
+        public Bread Bread { get; private set; } = new Bread();
 
-        public void CreateBread() => Bread = new Bread();
         public abstract void SetFlour();
         public abstract void SetSalt();
         public abstract void SetAdditives();
@@ -57,21 +56,17 @@ namespace Builder.Example
     // Строитель для ржаного хлеба.
     class RyeBreadBuilder : BreadBuilder
     {
-        public override void SetFlour() => Bread.Flour = new Flour { Sort = "Ржаная мука 1 сорт" };
-
+        public override void SetFlour() => Bread.Flour = new Flour() { Sort = "Ржаная мука 1 сорт" };
         public override void SetSalt() => Bread.Salt = new Salt();
-
         public override void SetAdditives() { /* не используется */ }
     }
 
     // Строитель для пшеничного хлеба.
     class WheatBreadBuilder : BreadBuilder
     {
-        public override void SetFlour() => Bread.Flour = new Flour { Sort = "Пшеничная мука 1 сорт" };
-
+        public override void SetFlour() => Bread.Flour = new Flour() { Sort = "Пшеничная мука 1 сорт" };
         public override void SetSalt() => Bread.Salt = new Salt();
-
-        public override void SetAdditives() => Bread.Additives = new Additives { Name = "Улучшитель хлебопекарный" };
+        public override void SetAdditives() => Bread.Additives = new Additives() { Name = "Улучшитель хлебопекарный" };
     }
 
     // Пекарь.
@@ -79,7 +74,6 @@ namespace Builder.Example
     {
         public Bread Bake(BreadBuilder breadBuilder)
         {
-            breadBuilder.CreateBread();
             breadBuilder.SetFlour();
             breadBuilder.SetSalt();
             breadBuilder.SetAdditives();

@@ -12,41 +12,41 @@ namespace Prototype.DeepCopyExample
         public int Y { get; set; }
     }
 
-    interface IFigure
+    interface IFigure2
     {
-        IFigure Clone();
+        IFigure2 Clone();
         void GetInfo();
     }
 
-    class Rectangle : IFigure
+    class Rectangle2 : IFigure2
     {
         int Width;
         int Height;
 
-        public Rectangle(int width, int height)
+        public Rectangle2(int width, int height)
         {
             Width = width;
             Height = height;
         }
 
-        public IFigure Clone() => MemberwiseClone() as IFigure;
+        public IFigure2 Clone() => MemberwiseClone() as IFigure2;
         public void GetInfo() => Console.WriteLine($"Прямоугольник длиной {Height} и шириной {Width}.");
     }
 
     [Serializable]
-    class Circle : IFigure
+    class Circle2 : IFigure2
     {
         int Radius;
         public Point Point { get; set; }
 
-        public Circle(int radius, int x, int y)
+        public Circle2(int radius, int x, int y)
         {
             Radius = radius;
             Point = new Point() { X = x, Y = y };
         }
 
         // Поверхностная копия копирует поля значимых типов, а для полей ссылочных типов копируются ссылки.
-        public IFigure Clone() => MemberwiseClone() as IFigure;
+        public IFigure2 Clone() => MemberwiseClone() as IFigure2;
         // Глубокая копия копирует поля значимых типов и для полей ссылочных типов создает глубокие копии объектов.
         public object DeepCopy()
         {

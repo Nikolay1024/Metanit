@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Prototype.DeepCopyExample;
+using Prototype.Example;
+using System;
 
 namespace Prototype
 {
@@ -14,15 +16,16 @@ namespace Prototype
         static void Prototype()
         {
             Console.WriteLine("-> Prototype без глубокого копирования");
-            Example.IFigure figure = new Example.Rectangle(30, 40);
-            Example.IFigure clonedFigure = figure.Clone();
-            figure.GetInfo();
-            clonedFigure.GetInfo();
+            
+            IFigure1 rectangle = new Rectangle1(30, 40);
+            IFigure1 clonedRectangle = rectangle.Clone();
+            rectangle.GetInfo();
+            clonedRectangle.GetInfo();
 
-            figure = new Example.Circle(30);
-            clonedFigure = figure.Clone();
-            figure.GetInfo();
-            clonedFigure.GetInfo();
+            IFigure1 circle = new Circle1(30);
+            IFigure1 clonedCircle = circle.Clone();
+            circle.GetInfo();
+            clonedCircle.GetInfo();
 
             Console.ReadLine();
         }
@@ -30,12 +33,13 @@ namespace Prototype
         static void PrototypeDeepCopy()
         {
             Console.WriteLine("-> Prototype с глубоким копированием");
-            var figure = new DeepCopyExample.Circle(30, 50, 60);
+
+            var circle = new Circle2(30, 50, 60);
             // Применяем глубокое копирование.
-            var clonedFigure = figure.DeepCopy() as DeepCopyExample.Circle;
-            figure.Point.X = 100;
-            figure.GetInfo();
-            clonedFigure.GetInfo();
+            var clonedCircle = circle.DeepCopy() as Circle2;
+            circle.Point.X = 100;
+            circle.GetInfo();
+            clonedCircle.GetInfo();
 
             Console.ReadLine();
         }

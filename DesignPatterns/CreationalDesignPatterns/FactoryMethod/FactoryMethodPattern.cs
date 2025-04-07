@@ -27,4 +27,15 @@
     {
         public override Product FactoryMethod() => new ConcreteProductB();
     }
+
+    class Client
+    {
+        public void UseFactoryMethodPattern()
+        {
+            Creator creatorA = new ConcreteCreatorA();
+            Product productA = creatorA.FactoryMethod();
+            Creator creatorB = new ConcreteCreatorB();
+            Product productB = creatorB.FactoryMethod();
+        }
+    }
 }

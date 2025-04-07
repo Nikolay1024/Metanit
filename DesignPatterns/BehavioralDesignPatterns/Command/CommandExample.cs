@@ -3,6 +3,64 @@ using System.Collections.Generic;
 
 namespace Command.Example
 {
+    // Инициатор команды (Пульт).
+    class RemoteСontrol
+    {
+        Queue<Command> CommandsQueue = new Queue<Command>();
+        Stack<Command> CommandsHistory = new Stack<Command>();
+
+        public void AddCommand(Command command) => CommandsQueue.Enqueue(command);
+        public void PressButton()
+        {
+            Command command = CommandsQueue.Dequeue();
+            command?.Execute();
+            CommandsHistory.Push(command);
+        }
+        public void PressUndoButton()
+        {
+            if (CommandsHistory.Count > 0)
+            {
+                Command command = CommandsHistory.Pop();
+                command?.Undo();
+            }
+        }
+    }
+
+    // Получатель команды (Телевизор).
+    class Televisor
+    {
+        public void On() => Console.WriteLine("Телевизор включен!");
+        public void Off() => Console.WriteLine("Телевизор выключен...");
+    }
+
+    // Получатель команды (Громкость).
+    class Volume
+    {
+        const int MinVolume = 0;
+        const int MaxVolume = 20;
+        int CurrentVolume = 0;
+
+        public void IncreaseVolume()
+        {
+            if (CurrentVolume < MaxVolume)
+                CurrentVolume++;
+            Console.WriteLine($"Уровень звука {CurrentVolume}.");
+        }
+        public void DecreaseVolume()
+        {
+            if (CurrentVolume > MinVolume)
+                CurrentVolume--;
+            Console.WriteLine($"Уровень звука {CurrentVolume}.");
+        }
+    }
+
+    // Получатель команды (Микроволновка).
+    class Microwave
+    {
+        public void StartCooking() => Console.WriteLine("Подогреваем еду");
+        public void StopCooking() => Console.WriteLine("Еда подогрета!");
+    }
+
     abstract class Command
     {
         public abstract void Execute();
@@ -37,65 +95,5 @@ namespace Command.Example
 
         public override void Execute() => Microwave.StartCooking();
         public override void Undo() => Microwave.StopCooking();
-    }
-
-    // Получатель команды (Телевизор).   
-    class Televisor
-    {
-        public void On() => Console.WriteLine("Телевизор включен!");
-        public void Off() => Console.WriteLine("Телевизор выключен...");
-    }
-
-    // Получатель команды (Громкость).   
-    class Volume
-    {
-        const int MinVolume = 0;
-        const int MaxVolume = 20;
-        int CurrentVolume;
-
-        public Volume() => CurrentVolume = MinVolume;
-
-        public void IncreaseVolume()
-        {
-            if (CurrentVolume < MaxVolume)
-                CurrentVolume++;
-            Console.WriteLine($"Уровень звука {CurrentVolume}.");
-        }
-        public void DecreaseVolume()
-        {
-            if (CurrentVolume > MinVolume)
-                CurrentVolume--;
-            Console.WriteLine($"Уровень звука {CurrentVolume}.");
-        }
-    }
-
-    // Получатель команды (Микроволновка).   
-    class Microwave
-    {
-        public void StartCooking() => Console.WriteLine("Подогреваем еду");
-        public void StopCooking() => Console.WriteLine("Еда подогрета!");
-    }
-
-    // Инициатор команды (Пульт).
-    class RemoteСontrol
-    {
-        Queue<Command> CommandsQueue = new Queue<Command>();
-        Stack<Command> CommandsHistory = new Stack<Command>();
-
-        public void AddCommand(Command command) => CommandsQueue.Enqueue(command);
-        public void PressButton()
-        {
-            Command command = CommandsQueue.Dequeue();
-            command?.Execute();
-            CommandsHistory.Push(command);
-        }
-        public void PressUndoButton()
-        {
-            if (CommandsHistory.Count > 0)
-            {
-                Command command = CommandsHistory.Pop();
-                command?.Undo();
-            }
-        }
     }
 }

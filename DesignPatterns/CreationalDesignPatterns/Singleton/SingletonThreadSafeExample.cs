@@ -1,30 +1,30 @@
 ﻿namespace Singleton.ThreadSafeExample
 {
-    class OperationSystem
+    class OperationSystem2
     {
-        static OperationSystem Instance;
+        static OperationSystem2 Instance;
 
         public string Name { get; private set; }
         static object SyncRoot = new object();
 
-        protected OperationSystem(string name) => Name = name;
+        protected OperationSystem2(string name) => Name = name;
 
-        public static OperationSystem GetInstance(string name)
+        public static OperationSystem2 GetInstance(string name)
         {
             // Чтобы избежать одновременного доступа к коду из разных потоков критическая секция заключается в блок lock.
             lock (SyncRoot)
             {
                 if (Instance == null)
-                    Instance = new OperationSystem(name);
+                    Instance = new OperationSystem2(name);
             }
             return Instance;
         }
     }
 
-    class Computer
+    class Computer2
     {
-        public OperationSystem OperationSystem { get; set; }
+        public OperationSystem2 OperationSystem { get; set; }
 
-        public void Launch(string name) => OperationSystem = OperationSystem.GetInstance(name);
+        public void Launch(string name) => OperationSystem = OperationSystem2.GetInstance(name);
     }
 }

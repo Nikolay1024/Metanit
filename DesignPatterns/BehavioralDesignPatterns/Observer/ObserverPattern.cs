@@ -29,9 +29,7 @@ namespace Observer.Pattern
 
     class ConcreteObservable : IObservable
     {
-        List<IObserver> Observers;
-
-        public ConcreteObservable() => Observers = new List<IObserver>();
+        List<IObserver> Observers = new List<IObserver>();
 
         public void AddObserver(IObserver observer) => Observers.Add(observer);
         public void RemoveObserver(IObserver observer) => Observers.Remove(observer);

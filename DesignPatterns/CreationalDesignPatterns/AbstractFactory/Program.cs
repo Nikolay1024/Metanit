@@ -8,11 +8,11 @@ namespace AbstractFactory
         static void Main(string[] args)
         {
             Hero warrior = new Hero(new WarriorFactory());
-            warrior.Run();
+            warrior.Move();
             warrior.Hit();
 
             Hero archer = new Hero(new ArcherFactory());
-            archer.Run();
+            archer.Move();
             archer.Hit();
 
             Console.ReadLine();

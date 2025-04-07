@@ -9,39 +9,39 @@ namespace Builder.Pattern
     // 2. Когда необходимо обеспечить получение различных вариаций объекта в процессе его создания.
     class Product
     {
-        List<object> Parts = new List<object>();
+        List<string> Parts = new List<string>();
 
         public void Add(string part) => Parts.Add(part);
     }
 
     abstract class Builder
     {
+        public Product Product { get; private set; } = new Product();
+
         public abstract void BuildPartA();
         public abstract void BuildPartB();
         public abstract void BuildPartC();
-        public abstract Product GetResult();
     }
 
     class ConcreteBuilder : Builder
     {
-        Product Product = new Product();
         public override void BuildPartA() => Product.Add("Part A");
         public override void BuildPartB() => Product.Add("Part B");
         public override void BuildPartC() => Product.Add("Part C");
-        public override Product GetResult() => Product;
     }
 
-    class Director
+    class Client
     {
         Builder Builder;
 
-        public Director(Builder builder) => Builder = builder;
+        public Client(Builder builder) => Builder = builder;
 
-        public void Construct()
+        public Product Construct()
         {
             Builder.BuildPartA();
             Builder.BuildPartB();
             Builder.BuildPartC();
+            return Builder.Product;
         }
     }
 

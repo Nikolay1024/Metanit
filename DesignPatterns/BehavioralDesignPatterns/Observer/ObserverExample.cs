@@ -75,14 +75,8 @@ namespace Observer.Example
     class Stock : IObservable
     {
         // Информация о торгах.
-        StockInfo StockInfo;
-        List<IObserver> Observers;
-
-        public Stock()
-        {
-            StockInfo = new StockInfo();
-            Observers = new List<IObserver>();
-        }
+        StockInfo StockInfo = new StockInfo();
+        List<IObserver> Observers = new List<IObserver>();
 
         public void AddObserver(IObserver observer) => Observers.Add(observer);
         public void RemoveObserver(IObserver observer) => Observers.Remove(observer);

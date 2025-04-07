@@ -8,6 +8,24 @@
     // 3. Когда надо поддерживать логгирование изменений в результате запросов.
     // Использование логов может помочь восстановить состояние системы.
     // Для этого необходимо будет использовать последовательность запротоколированных команд.
+
+    // Инициатор команды.
+    class Invoker
+    {
+        Command Command;
+
+        public void SetCommand(Command command) => Command = command;
+        public void Execute() => Command.Execute();
+        public void Undo() => Command.Undo();
+    }
+
+    // Получатель команды.
+    class Receiver
+    {
+        public void Execute() { }
+        public void Undo() { }
+    }
+
     abstract class Command
     {
         public abstract void Execute();
@@ -21,35 +39,20 @@
 
         public ConcreteCommand(Receiver receiver) => Receiver = receiver;
 
-        public override void Execute() => Receiver.Operation();
-        public override void Undo() { }
-    }
-
-    // Получатель команды.
-    class Receiver
-    {
-        public void Operation() { }
+        public override void Execute() => Receiver.Execute();
+        public override void Undo() => Receiver.Undo();
     }
     
-    // Инициатор команды.
-    class Invoker
-    {
-        Command Command;
-
-        public void SetCommand(Command command) => Command = command;
-        public void Run() => Command.Execute();
-        public void Cancel () => Command.Undo();
-    }
-
     class Client
     {
-        void Use()
+        public void UseCommandPattern()
         {
             var invoker = new Invoker();
             var receiver = new Receiver();
-            var concreteCommand = new ConcreteCommand(receiver);
+            Command concreteCommand = new ConcreteCommand(receiver);
             invoker.SetCommand(concreteCommand);
-            invoker.Run();
+            invoker.Execute();
+            invoker.Undo();
         }
     }
 }

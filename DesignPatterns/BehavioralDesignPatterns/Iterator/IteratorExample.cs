@@ -44,9 +44,9 @@ namespace Iterator.Example
         {
             Books = new Book[]
             {
-                new Book{Name="Война и мир"},
-                new Book {Name="Отцы и дети"},
-                new Book {Name="Вишневый сад"},
+                new Book() { Name="Война и мир" },
+                new Book() { Name="Отцы и дети" },
+                new Book() { Name="Вишневый сад" },
             };
         }
 

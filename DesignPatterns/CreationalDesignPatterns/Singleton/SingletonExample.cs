@@ -1,25 +1,25 @@
 ﻿namespace Singleton.Example
 {
     // Одиночка.
-    class OperationSystem
+    class OperationSystem1
     {
-        static OperationSystem Instance;
+        static OperationSystem1 Instance;
         public string Name { get; private set; }
 
-        protected OperationSystem(string name) => Name = name;
+        protected OperationSystem1(string name) => Name = name;
 
-        public static OperationSystem GetInstance(string name)
+        public static OperationSystem1 GetInstance(string name)
         {
             if (Instance == null)
-                Instance = new OperationSystem(name);
+                Instance = new OperationSystem1(name);
             return Instance;
         }
     }
 
-    class Computer
+    class Computer1
     {
-        public OperationSystem OperationSystem { get; set; }
+        public OperationSystem1 OperationSystem { get; set; }
         
-        public void Launch(string name) => OperationSystem = OperationSystem.GetInstance(name);
+        public void Launch(string name) => OperationSystem = OperationSystem1.GetInstance(name);
     }
 }

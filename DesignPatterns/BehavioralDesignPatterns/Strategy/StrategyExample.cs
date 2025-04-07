@@ -9,20 +9,20 @@ namespace Strategy.Example
 
     class PetrolMove : IMovable
     {
-        public void Move() => Console.WriteLine("Перемещение на бензине");
+        public void Move() => Console.WriteLine("Перемещение на бензине.");
     }
 
     class ElectricMove : IMovable
     {
-        public void Move() => Console.WriteLine("Перемещение на электричестве");
+        public void Move() => Console.WriteLine("Перемещение на электричестве.");
     }
 
     class Car
     {
         // Кол-во пассажиров.
-        protected int Passengers;
+        int Passengers;
         // Модель автомобиля.
-        protected string Model;
+        string Model;
         public IMovable Movable { private get; set; }
 
         public Car(int passengers, string model, IMovable movable)

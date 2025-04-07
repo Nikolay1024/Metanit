@@ -7,8 +7,6 @@
     {
         static Singleton Instance;
 
-        Singleton() { }
-
         public static Singleton GetInstance()
         {
             if (Instance == null)
